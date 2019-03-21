@@ -13,7 +13,7 @@ export function BooksListItem({
 }) {
     return (
         <li className="list-group-item">
-            <img src={image} />
+            <img alt="" src={image} />
             <h4>{title}</h4>
             <p>{authors}</p>
             <p>{description}</p>

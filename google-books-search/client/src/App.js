@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from "./components/Navbar";
 import Jumbotron from "./components/Jumbotron";
 import { BooksList, BooksListItem } from "./components/BooksList";
+import API from "./utils/API";
 
 class App extends Component {
   state = {
@@ -14,6 +15,13 @@ class App extends Component {
     this.setState = ({ [name]: value });
   };
 
+  searchSubmit = event => {
+    event.preventDefault();
+    API.getBooks(this.state.bookSearch)
+    .then(res => this.setState({ books: res.data }))
+    .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div>
@@ -24,14 +32,13 @@ class App extends Component {
             <h5 className="card-title m-3">Book Search</h5>
             <div className="form-group m-3">
               <input
-              className="form-control"
-              id="bookSearch"
-              name="bookSearch"
-              placeholder="Enter Title or Author Here"
-              onChange={this.searchChange}
-              type="search"
-              value={this.state.bookSearch} />
-              <button type="submit" className="btn btn-primary my-3 float-right">Search</button>
+                className="form-control"
+                id="bookSearch"
+                name="bookSearch"
+                placeholder="Enter Title or Author Here"
+                onChange={this.searchChange}
+                type="search" />
+              <button type="submit" className="btn btn-primary my-3 float-right" onClick={this.searchSubmit}>Search</button>
             </div>
           </div>
           <br />
@@ -43,7 +50,13 @@ class App extends Component {
               <BooksList>
                 {this.state.books.map(book => {
                   return (
-                    <BooksListItem />
+                    <BooksListItem
+                      key={book.title}
+                      title={book.title}
+                      href={book.link}
+                      authors={book.authors}
+                      description={book.description}
+                      image={book.image} />
                   );
                 })}
               </BooksList>
