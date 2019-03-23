@@ -4,12 +4,10 @@ require("dotenv").config();
 const keys = require("./keys")
 
 router.post("/books", (req, res) => {
-  console.log("THEBODY",req.body)
+  console.log(req.body.query);
   axios
-    // .get("https://www.googleapis.com/books/v1/volumes?q=harry+potter", { params: { key: keys.googleBooks.api } })
-    .get(`https://www.googleapis.com/books/v1/volumes?q=harrys&key=AIzaSyBh-Yp72QxUwzpd615cvAY_xnSpZpwoyWY`)
-    .then(data => res.json(data))
-    // .catch(err => console.log(err));
+    .get("https://www.googleapis.com/books/v1/volumes?q=harry+potter", { params: { q: req.body.query, key: keys.googleBooks.api } })
+    .then(data => console.log(data.data.items));
 });
 
 module.exports = router;

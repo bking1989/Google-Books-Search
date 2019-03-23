@@ -16,10 +16,10 @@ class App extends Component {
   };
 
   searchSubmit = event => {
-    console.log(this.state);
-    // event.preventDefault();
+    event.preventDefault();
+    
     API.getBooks(this.state.bookSearch)
-    .then(res => this.setState({ books: res.data }))
+    .then(res => this.setState({ books: res.data.data.items }))
     .catch(err => console.log(err));
   };
 
