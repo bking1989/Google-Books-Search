@@ -8,18 +8,33 @@ class App extends Component {
   state = {
     books: [],
     bookSearch: ""
-  }
+  };
 
   searchChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
+  makeNewItem = (item) => {
+    let newItem = {};
+
+    newItem.title = item.volumeInfo.title;
+    newItem.authors = item.volumeInfo.authors.toString();
+    newItem.description = item.description;
+    newItem.image = item.volumeInfo.imageLinks.large;
+    newItem.link = item.volumeInfo.infoLink;
+    newItem.id = item.id;
+    
+    this.setState ({ books: [...this.state.books, newItem] });
+  };
+
   searchSubmit = event => {
     event.preventDefault();
     
+    this.setState({ books: [] })
+    
     API.getBooks(this.state.bookSearch)
-    .then(res => this.setState({ books: res.data.data.items }))
+    .then(res => res.data.forEach((item) => this.makeNewItem(item)))
     .catch(err => console.log(err));
   };
 
@@ -54,7 +69,7 @@ class App extends Component {
                 {this.state.books.map(book => {
                   return (
                     <BooksListItem
-                      key={book.title}
+                      key={book.id}
                       title={book.title}
                       href={book.link}
                       authors={book.authors}
