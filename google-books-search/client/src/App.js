@@ -12,11 +12,12 @@ class App extends Component {
 
   searchChange = event => {
     const { name, value } = event.target;
-    this.setState = ({ [name]: value });
+    this.setState({ [name]: value });
   };
 
   searchSubmit = event => {
-    event.preventDefault();
+    console.log(this.state);
+    // event.preventDefault();
     API.getBooks(this.state.bookSearch)
     .then(res => this.setState({ books: res.data }))
     .catch(err => console.log(err));
@@ -32,13 +33,15 @@ class App extends Component {
             <h5 className="card-title m-3">Book Search</h5>
             <div className="form-group m-3">
               <input
+                onChange={this.searchChange}
+
                 className="form-control"
                 id="bookSearch"
                 name="bookSearch"
+                value={this.state.bookSearch}
                 placeholder="Enter Title or Author Here"
-                onChange={this.searchChange}
-                type="search" />
-              <button type="submit" className="btn btn-primary my-3 float-right" onClick={this.searchSubmit}>Search</button>
+                type="text" />
+              <button type="button" className="btn btn-primary my-3 float-right" onClick={this.searchSubmit}>Search</button>
             </div>
           </div>
           <br />
