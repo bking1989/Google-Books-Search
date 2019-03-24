@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Jumbotron from "./components/Jumbotron";
 import { BooksList, BooksListItem } from "./components/BooksList";
+import { SavedList, SavedListItem } from "./components/SavedList";
 import API from "./utils/API";
 
 class App extends Component {
   state = {
     books: [],
-    bookSearch: ""
+    bookSearch: "",
+    savedBooks: []
   };
 
   searchChange = event => {
@@ -38,6 +40,12 @@ class App extends Component {
     .then(res => res.data.forEach((item) => this.makeNewItem(item)))
     .catch(err => console.log(err));
   };
+
+  renderSaved = () => {
+    API.getSaved()
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -120,6 +128,29 @@ class App extends Component {
                         );
                       })}
                     </BooksList>
+                  )}
+                </div>
+              </Route>
+              <Route exact path="/saved">
+                { this.renderSaved() }
+                <div className="card" id="savedCard">
+                  <h5 className="card-title m-3">Saved Books</h5>
+                  {!this.state.savedBooks.length ? (
+                    <h5 className="text-center">Sorry, there are no saved books!<br /><br /></h5>
+                  ) : (
+                    <SavedList>
+                      {this.state.books.map(book => {
+                        return (
+                          <SavedListItem
+                            key={book.id}
+                            title={book.title}
+                            url={book.url}
+                            authors={book.authors}
+                            description={book.description}
+                            image={book.image} />
+                        );
+                      })}
+                    </SavedList>
                   )}
                 </div>
               </Route>
