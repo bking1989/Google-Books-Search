@@ -23,7 +23,7 @@ class App extends Component {
     newItem.authors = item.volumeInfo.authors.toString().replace(/,/g, ', ');
     newItem.description = item.volumeInfo.description || "No description provided";
     newItem.image = item.volumeInfo.imageLinks.thumbnail;
-    newItem.bookLink = item.volumeInfo.infoLink;
+    newItem.url = item.volumeInfo.infoLink;
     newItem.id = item.id;
 
     this.setState ({ books: [...this.state.books, newItem] });
@@ -75,7 +75,7 @@ class App extends Component {
                           <BooksListItem
                             key={book.id}
                             title={book.title}
-                            href={book.link}
+                            url={book.url}
                             authors={book.authors}
                             description={book.description}
                             image={book.image} />
@@ -113,7 +113,7 @@ class App extends Component {
                           <BooksListItem
                             key={book.id}
                             title={book.title}
-                            href={book.link}
+                            url={book.url}
                             authors={book.authors}
                             description={book.description}
                             image={book.image} />
