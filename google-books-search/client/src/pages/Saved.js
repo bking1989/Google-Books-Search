@@ -7,11 +7,17 @@ class Saved extends Component {
         savedBooks: []
     };
 
-    componentDidMount = () => {
+    // Load all the books from our mongo DB
+    loadSaved = () => {
         API.getSaved()
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
-      }
+    };
+
+    componentDidMount = () => {
+        this.setState({ savedBooks: [] });
+        this.loadSaved();
+    };
 
     render() {
         return (
