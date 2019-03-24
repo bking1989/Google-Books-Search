@@ -28,4 +28,11 @@ router.get("/books", (req, res) => {
   .catch(err => console.log(err))
 });
 
+// DELETE route for removing saved book
+router.delete("/books/:id", (req, res) => {
+  db.Books
+  .deleteOne({ _id: req.params.id })
+  .catch(err => console.log(err))
+})
+
 module.exports = router;

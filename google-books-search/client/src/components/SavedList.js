@@ -1,15 +1,25 @@
 import React from "react";
+import API from "../utils/API";
 
 export function SavedList({ children }) {
     return <ul className="list-group">{children}</ul>;
 }
+
+export function deleteBook(id) {
+    API
+    .removeSaved(id)
+    .catch(err => console.log(err))
+
+    window.location.reload();
+};
 
 export function SavedListItem({
     authors,
     description,
     image,
     url,
-    title
+    title,
+    id
 }) {
     return (
         <li className="list-group-item mt-0 mb-2 mx-2">
@@ -24,6 +34,7 @@ export function SavedListItem({
                 </div>
                 <div className="col-sm-2 text-center">
                     <a href={url} className="btn btn-primary text-white mb-2" target="_blank" rel="noopener noreferrer">Check It Out</a>
+                    <button type="button" className="btn btn-primary saveBtn" onClick={() => deleteBook(id)}>Remove Saved Book</button>
                 </div>
             </div>
         </li>

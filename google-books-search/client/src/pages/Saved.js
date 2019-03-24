@@ -32,7 +32,8 @@ class Saved extends Component {
                                     url={book.url}
                                     authors={book.authors}
                                     description={book.description}
-                                    image={book.image} />
+                                    image={book.image}
+                                    id={book._id} />
                                     );
                                 })}
                         </SavedList>
