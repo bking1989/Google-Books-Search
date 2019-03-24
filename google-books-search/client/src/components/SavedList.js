@@ -23,6 +23,7 @@ export function SavedListItem({
                     <p>{description}</p>
                 </div>
                 <div className="col-sm-2 text-center">
+                    <a href={url} className="btn btn-primary text-white mb-2" target="_blank" rel="noopener noreferrer">Check It Out</a>
                 </div>
             </div>
         </li>

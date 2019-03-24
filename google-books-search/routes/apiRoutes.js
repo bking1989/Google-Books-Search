@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
 router.post("/books", (req, res) => {
   db.Books
   .create(req.body)
-  .then(model => res.json(model))
+  .then(data => res.json(data))
   .catch(err => console.log(err))
 });
 

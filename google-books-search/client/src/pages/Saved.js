@@ -7,16 +7,12 @@ class Saved extends Component {
         savedBooks: []
     };
 
-    // Load all the books from our mongo DB
-    loadSaved = () => {
-        API.getSaved()
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
-    };
-
     componentDidMount = () => {
-        this.setState({ savedBooks: [] });
-        this.loadSaved();
+        this.setState({ savedBooks: [] })
+
+        API.getSaved()
+        .then(res => this.setState({ savedBooks: res.data}))
+        .catch(err => console.log(err));
     };
 
     render() {
@@ -28,10 +24,10 @@ class Saved extends Component {
                         <h5 className="text-center">Sorry, there are no saved books!<br /><br /></h5>
                         ) : (
                         <SavedList>
-                            {this.state.books.map(book => {
+                            {this.state.savedBooks.map(book => {
                                 return (
                                     <SavedListItem
-                                    key={book.id}
+                                    key={book._id}
                                     title={book.title}
                                     url={book.url}
                                     authors={book.authors}

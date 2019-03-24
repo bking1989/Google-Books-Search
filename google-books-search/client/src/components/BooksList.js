@@ -5,13 +5,13 @@ export function BooksList({ children }) {
     return <ul className="list-group">{children}</ul>;
 }
 
-export function saveBook() {
+export function saveBook(title, authors, description, image, url) {
     let newSave = {
-        title: {title}.toString(),
-        authors: {authors}.toString(),
-        description: {description}.toString(),
-        image: {image}.toString(),
-        url: {url}.toString()
+        title: title.toString(),
+        authors: authors.toString(),
+        description: description.toString(),
+        image: image.toString(),
+        url: url.toString()
     };
 
     API
@@ -39,7 +39,7 @@ export function BooksListItem({
                 </div>
                 <div className="col-sm-2 text-center">
                     <a href={url} className="btn btn-primary text-white mb-2" target="_blank" rel="noopener noreferrer">Check It Out</a>
-                    <button type="button" className="btn btn-primary saveBtn" onClick={saveBook()}>Save Book</button>
+                    <button type="button" className="btn btn-primary saveBtn" onClick={() => saveBook(title, authors, description, image, url)}>Save Book</button>
                 </div>
             </div>
         </li>
