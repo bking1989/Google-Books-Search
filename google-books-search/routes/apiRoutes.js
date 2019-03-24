@@ -12,9 +12,18 @@ router.post("/", (req, res) => {
     .then(data => res.send(data.data.items))
 });
 
+// POST route for saving books
+router.post("/books", (req, res) => {
+  db.Books
+  .create(req.body)
+  .then(model => res.json(model))
+  .catch(err => console.log(err))
+});
+
 // GET route for getting saved book data
 router.get("/books", (req, res) => {
-  db.Books.find({}).sort({ title: 1 })
+  db.Books
+  .find({}).sort({ title: 1 })
   .then(data => res.json(data))
   .catch(err => console.log(err))
 });

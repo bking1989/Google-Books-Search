@@ -2,51 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Jumbotron from "./components/Jumbotron";
-import { BooksList, BooksListItem } from "./components/BooksList";
-import { SavedList, SavedListItem } from "./components/SavedList";
-import API from "./utils/API";
+import Search from "./pages/Search";
+import Saved from "./pages/Saved";
 
 class App extends Component {
-  state = {
-    books: [],
-    bookSearch: "",
-    savedBooks: []
-  };
-
-  searchChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  makeNewItem = (item) => {
-    let newItem = {};
-
-    newItem.title = item.volumeInfo.title;
-    newItem.authors = item.volumeInfo.authors.toString().replace(/,/g, ', ');
-    newItem.description = item.volumeInfo.description || "No description provided";
-    newItem.image = item.volumeInfo.imageLinks.thumbnail;
-    newItem.url = item.volumeInfo.infoLink;
-    newItem.id = item.id;
-
-    this.setState ({ books: [...this.state.books, newItem] });
-  };
-
-  searchSubmit = event => {
-    event.preventDefault();
-
-    this.setState({ books: [] })
-
-    API.getBooks(this.state.bookSearch)
-    .then(res => res.data.forEach((item) => this.makeNewItem(item)))
-    .catch(err => console.log(err));
-  };
-
-  renderSaved = () => {
-    API.getSaved()
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err));
-  }
-
   render() {
     return (
       <div>
@@ -55,105 +14,9 @@ class App extends Component {
           <div className="container">
             <Jumbotron />
             <Switch>
-              <Route exact path="/">
-                <div className="card" id="searchCard">
-                <h5 className="card-title m-3">Book Search</h5>
-                <div className="form-group m-3">
-                  <input
-                    onChange={this.searchChange}
-
-                    className="form-control"
-                    id="bookSearch"
-                    name="bookSearch"
-                    value={this.state.bookSearch}
-                    placeholder="Enter Title or Author Here"
-                    type="text" />
-                  <button type="button" className="btn btn-primary my-3 float-right" onClick={this.searchSubmit}>Search</button>
-                </div>
-                </div>
-                <br />
-                <div className="card mb-3" id="resultsCard">
-                  <h5 className="card-title m-3">Results</h5>
-                  {!this.state.books.length ? (
-                    <h5 className="text-center">Sorry, no results can be found!<br /><br /></h5>
-                  ) : (
-                    <BooksList>
-                      {this.state.books.map(book => {
-                        return (
-                          <BooksListItem
-                            key={book.id}
-                            title={book.title}
-                            url={book.url}
-                            authors={book.authors}
-                            description={book.description}
-                            image={book.image} />
-                        );
-                      })}
-                    </BooksList>
-                  )}
-                </div>
-              </Route>
-              <Route exact path="/search">
-                <div className="card" id="searchCard">
-                <h5 className="card-title m-3">Book Search</h5>
-                <div className="form-group m-3">
-                  <input
-                    onChange={this.searchChange}
-
-                    className="form-control"
-                    id="bookSearch"
-                    name="bookSearch"
-                    value={this.state.bookSearch}
-                    placeholder="Enter Title or Author Here"
-                    type="text" />
-                  <button type="button" className="btn btn-primary my-3 float-right" onClick={this.searchSubmit}>Search</button>
-                </div>
-                </div>
-                <br />
-                <div className="card mb-3" id="resultsCard">
-                  <h5 className="card-title m-3">Results</h5>
-                  {!this.state.books.length ? (
-                    <h5 className="text-center">Sorry, no results can be found!<br /><br /></h5>
-                  ) : (
-                    <BooksList>
-                      {this.state.books.map(book => {
-                        return (
-                          <BooksListItem
-                            key={book.id}
-                            title={book.title}
-                            url={book.url}
-                            authors={book.authors}
-                            description={book.description}
-                            image={book.image} />
-                        );
-                      })}
-                    </BooksList>
-                  )}
-                </div>
-              </Route>
-              <Route exact path="/saved">
-                { this.renderSaved() }
-                <div className="card" id="savedCard">
-                  <h5 className="card-title m-3">Saved Books</h5>
-                  {!this.state.savedBooks.length ? (
-                    <h5 className="text-center">Sorry, there are no saved books!<br /><br /></h5>
-                  ) : (
-                    <SavedList>
-                      {this.state.books.map(book => {
-                        return (
-                          <SavedListItem
-                            key={book.id}
-                            title={book.title}
-                            url={book.url}
-                            authors={book.authors}
-                            description={book.description}
-                            image={book.image} />
-                        );
-                      })}
-                    </SavedList>
-                  )}
-                </div>
-              </Route>
+              <Route exact path="/" component={Search} />
+              <Route exact path="/search" component={Search} />
+              <Route exact path="/saved" component={Saved} />
             </Switch>
           </div>
         </Router>
