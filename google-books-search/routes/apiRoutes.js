@@ -5,13 +5,15 @@ const keys = require("./keys");
 
 var db = require("../models");
 
-router.post("/books", (req, res) => {
+// POST-GET route for Google Books API
+router.post("/", (req, res) => {
   axios
     .get("https://www.googleapis.com/books/v1/volumes?", { params: { q: req.body.query, key: keys.googleBooks.api } })
     .then(data => res.send(data.data.items))
 });
 
-router.get("/saved", (req, res) => {
+// GET route for getting saved book data
+router.get("/books", (req, res) => {
   db.Books.find({}).sort({ title: 1 })
   .then(data => res.json(data))
   .catch(err => console.log(err))
