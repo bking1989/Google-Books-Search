@@ -9,8 +9,6 @@ export function deleteBook(id) {
     API
     .removeSaved(id)
     .catch(err => console.log(err))
-
-    this.forceUpdate();
 };
 
 export function SavedListItem({
