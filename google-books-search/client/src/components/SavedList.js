@@ -10,7 +10,7 @@ export function deleteBook(id) {
     .removeSaved(id)
     .catch(err => console.log(err))
 
-    window.location.reload();
+    this.forceUpdate();
 };
 
 export function SavedListItem({
