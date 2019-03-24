@@ -35,4 +35,9 @@ router.delete("/books/:id", (req, res) => {
   .catch(err => console.log(err))
 })
 
+// Final completed route
+router.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
 module.exports = router;
