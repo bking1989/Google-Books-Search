@@ -2,9 +2,9 @@
 A web application that searches Google Books built with React
 
 ## Table of Contents
-i. [Overview](#overview)
-ii. [Technology Used](#technology-used)
-iii. [How It Works](#how-it-works)
+1. [Overview](#overview)
+2. [Technology Used](#technology-used)
+3. [How It Works](#how-it-works)
 
 ## Overview
 As part of a code boot camp assignment, I was tasked with creating an application using the JavaScript library [React](https://reactjs.org/). This application was supposed to have at least two 'pages', which are not individual HTML files but rather routes that are defined using React's router package. These routes are as followed:
