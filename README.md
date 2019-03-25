@@ -22,7 +22,7 @@ As mentioned in the previous section, this assignment came with some assigned pi
 2. **Google Books API** - an application programmable interface (API) that would allow the user to run search queries for books
 3. [**Express.js**](https://expressjs.com/) - a web framework for Node.js that allows us to set up routes for the data that our API and database use
 4. [**Mongoose**](https://mongoosejs.com/) - an object-modeling package that makes it easier to create datasets for our MongoDB database
-5. Mongo.DB - An open-source, document-oriented, non-relational system for virtual databases
+5. MongoDB - An open-source, document-oriented, non-relational system for virtual databases
 
 ## How It Works
 The final version of this application is hosted courtesy of [Heroku](https://www.heroku.com/), and can be seen [here](https://limitless-stream-53661.herokuapp.com/).
