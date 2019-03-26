@@ -25,7 +25,7 @@ As mentioned in the previous section, this assignment came with some assigned pi
 5. MongoDB - An open-source, document-oriented, non-relational system for virtual databases
 
 ## How It Works
-The final version of this application is hosted courtesy of [Heroku](https://www.heroku.com/), and can be seen [here](https://limitless-stream-53661.herokuapp.com/).
+The final version of this application is hosted courtesy of [Heroku](https://www.heroku.com/), and can be seen [here](https://guarded-ravine-91972.herokuapp.com/).
 
 When the user visits the site, they're created with a basic search engine page. From there, they can search for books via keywords and queries - most preferably a book title or author. After the search is ran, the results will show up in the container beneath the search bar. The results includes the book's title, author, a thumbnail of the cover, and a link to the information page.
 
