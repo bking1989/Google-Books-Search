@@ -7,12 +7,17 @@ class Saved extends Component {
         savedBooks: []
     };
 
+    updateSavedList = ()=>{
+        API.getSaved()
+        .then(res => {
+            this.setState({ savedBooks: res.data})
+        })
+        .catch(err => console.log(err));
+    }
+
     componentDidMount = () => {
         this.setState({ savedBooks: [] })
-
-        API.getSaved()
-        .then(res => this.setState({ savedBooks: res.data}))
-        .catch(err => console.log(err));
+        this.updateSavedList()
     };
 
     render() {
@@ -33,7 +38,8 @@ class Saved extends Component {
                                     authors={book.authors}
                                     description={book.description}
                                     image={book.image}
-                                    id={book._id} />
+                                    id={book._id}
+                                    updateSavedList={this.updateSavedList} />
                                     );
                                 })}
                         </SavedList>

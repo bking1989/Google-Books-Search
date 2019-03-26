@@ -32,6 +32,7 @@ router.get("/books", (req, res) => {
 router.delete("/books/:id", (req, res) => {
   db.Books
   .deleteOne({ _id: req.params.id })
+  .then(data => res.json(data))
   .catch(err => console.log(err))
 })
 
