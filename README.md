@@ -1,6 +1,8 @@
 # Google-Books-Search
 A web application that searches Google Books built with React
 
+![Screenshot of the App](https://github.com/bking1989/Google-Books-Search/blob/master/Google%20Books%20Search%20Screenshot.png)
+
 ## Table of Contents
 1. [Overview](#overview)
 2. [Technology Used](#technology-used)
